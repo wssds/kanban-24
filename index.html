@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+
+    <title>Login</title>
+</head>
+
+<body>
+    <div>
+        <img src="img/img2.png">
+
+        <div class="overTop">
+            <div class="input_button">
+                <div>
+                    <input type="text" placeholder="Name" id="username">
+                </div>
+                <div>
+                    <input type="text" placeholder="Password" id="password">
+                </div>
+                <div class="container">
+                    <div class="center">
+                        <button class="btn" onclick="login()">
+                            <svg width="180px" height="60px" viewBox="0 0 180 60">
+                                <polyline points="179,1 179,59 1,59 1,1 179,1" />
+                                <polyline points="179,1 179,59 1,59 1,1 179,1" />
+                            </svg>
+                            <span>LOGIN</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let users = [
+            {
+                username: "Malte",
+                password: "test123"
+            },
+            {
+                username: "Maria",
+                password: "test456"
+            },
+            {
+                username: "Luisa",
+                password: "test789"
+            }
+        ];
+
+
+        function login() {
+
+            let username = document.getElementById('username').value
+            let password = document.getElementById('password').value
+
+            for (let i = 0; i < users.length; i++) {
+                if (username == users[i].username && password == users[i].password) {
+                    console.log(username + " logged in!!!")
+                    window.location.href = "add_Task.html";
+                    return
+
+                } else { alert('incorrect username or password!') 
+                console.log('incorrect username or password!')}
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>

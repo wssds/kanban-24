@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="includeHTML.js"></script>
+    <link rel="stylesheet" href="./templates/header.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+
+    <script src="add-task.js"></script>
+    <script src="./mini_backend.js"></script>
+    <script src="board.js"></script>
+
+    <title>AddTask</title>
+
+    <style>
+        body {
+            margin: 0%;
+            font-family: 'PT Sans', sans-serif !important;
+            display: flex;
+            justify-content: center;
+            background-color: #D6E6F2;
+            height: 100vh;
+        }
+
+        h4 {
+            margin: 10px !important;
+            margin-left: 0px !important;
+            font-size: 17px !important;
+            color: #D6E6F2 !important;
+        }
+
+        .all-box {
+            width: 60%;
+            margin: 12%;
+        }
+
+        .box1 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+
+        .box2 {
+            width: 700px;
+            height: 365px;
+            border-radius: 20px;
+            margin-right: 20%;
+            box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.651);
+            background-color: rgb(48, 52, 129);
+        }
+
+        .title-date {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            height: 95px;
+            padding-top: 15px;
+        }
+
+        .title {
+            width: 270px;
+        }
+
+        .title-field {
+            height: 30px;
+            width: 240px;
+            border-radius: 5px;
+            border: none;
+            padding-left: 10px;
+        }
+
+        .date {
+            width: 270px;
+        }
+
+        .category-priority {
+            display: flex;
+            flex-direction: row;
+            height: 87px;
+            justify-content: space-around;
+        }
+
+        .cat-prio {
+            border-radius: 5px;
+            height: 30px;
+            width: 150px;
+        }
+
+        .category {
+            width: 270px;
+        }
+
+        .priority {
+            width: 270px;
+        }
+
+        .description-member {
+            display: flex;
+            flex-direction: row;
+            height: 115px;
+            justify-content: space-around;
+        }
+
+        .description {
+            width: 270px;
+        }
+
+        .description-field {
+            height: 87px;
+            width: 240px;
+            border-radius: 5px;
+            border: none;
+            padding-left: 10px;
+            font-family: sans-serif !important;
+        }
+
+        .member {
+            width: 270px;
+        }
+
+
+
+
+        .btn-flip {
+            opacity: 1;
+            outline: 0;
+            color: #fff;
+            line-height: 40px;
+            position: relative;
+            text-align: center;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-decoration: none;
+            font-family: "Open Sans";
+            text-transform: uppercase;
+            background-color: rgb(48, 52, 129);
+            border: none;
+            margin-top: 25px;
+            margin-left: -6px;
+            cursor: pointer;
+        }
+
+        .btn-flip:hover:after {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        .btn-flip:hover:before {
+            opacity: 0;
+            transform: translateY(50%) rotateX(90deg);
+        }
+
+        .btn-flip:after {
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            color: #323237;
+            display: block;
+            transition: 0.5s;
+            position: absolute;
+            background: #bbbbbbb4;
+            content: attr(data-back);
+            transform: translateY(-50%) rotateX(90deg);
+        }
+
+        .btn-flip:before {
+            top: 0;
+            left: 0;
+            opacity: 1;
+            color: #D6E6F2;
+            display: block;
+            padding: 0 30px;
+            line-height: 40px;
+            transition: 0.5s;
+            position: relative;
+            background: #323237;
+            content: attr(data-front);
+            transform: translateY(0) rotateX(0);
+        }
+    </style>
+
+    <script>
+        setURL('https://sean-gerigk.developerakademie.net/smallest_backend_ever');
+
+        async function init() {
+            await downloadFromServer();
+            tasks = JSON.parse(backend.getItem('tasks')) || [];
+        }
+    </script>
+
+</head>
+
+<body onload="init(), includeHTML()">
+
+    <div w3-include-html="./templates/header.html"></div>
+
+    <div class="all-box">
+
+
+
+        <div class="box1">
+            <h1><b>Add Task</b></h1>
+            <p class="font">Learning Management System Project</p>
+        </div>
+
+
+
+        <div class="box2">
+
+            <div class="title-date">
+
+                <div class="title">
+                    <h4>TITLE</h4>
+                    <input placeholder="select your title" type="text" class="title-field" id="title_field">
+                </div>
+
+                <div class="date">
+                    <h4>DUE DATE</h4>
+                    <input type="date" class="title-field" id="start" name="trip-start"
+                        value="?php echo date('Y-m-d'); ?" min="2018-01-01" max="2021-12-31">
+                </div>
+
+            </div>
+
+
+            <div class="category-priority">
+                <div class="category">
+
+                    <h4>CATEGORY</h4>
+
+                    <select class="cat-prio" id="cat">
+                        <option value="" disabled selected>choose...</option>
+                        <option value="IT-Management">IT-Management</option>
+                        <option value="Purchasing">Purchasing</option>
+                        <option value="Sales-Management">Sales-Management</option>
+                        <option value="Logistic-Management">Logistic-Management</option>
+                    </select>
+                </div>
+
+
+
+
+                <div class="priority">
+                    <h4>URGENCY</h4>
+                    <select class="cat-prio" id="cat-prio">
+                        <option id="low" value="low">Low</option>
+                        <option id="medium"value="medium">Medium</option>
+                        <option id="high"value="high" selected>High</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="description-member">
+                <div class="description">
+
+                    <h4>DESCRIPTION</h4>
+
+                    <textarea class="description-field" placeholder="type here..." id="description" cols="30"
+                        rows="10"></textarea>
+                </div>
+
+                <div class="member">
+                    <h4>ASSIGNED TO</h4>
+                    <button onclick="addTasks()" class="btn-flip" data-back="Success" data-front="Create Task"></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    </div>
+
+
+
+</body>
+
+</html>
