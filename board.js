@@ -13,10 +13,9 @@ function updateHTML() {
     document.getElementById('done').innerHTML = '';
 
     for (let i = 0; i < todo.length; i++) {
-        let task = todo[i];
-        let color = colorBg(task['priority']);
+        
         document.getElementById('todo').innerHTML += generateTodoHTML(todo[i]);
-        document.getElementById('todo').style = 'background-color:'+color+';';
+        
         //document.getElementById('doToday').innerHTML += generateTodoHTML(low[i]);
         //document.getElementById('inProgress').innerHTML += generateTodoHTML(low[i]);
         //document.getElementById('done').innerHTML += generateTodoHTML(low[i]);
@@ -29,12 +28,10 @@ function updateHTML() {
     let dotoday = tasks.filter(t => t['list'] == 'dotoday');
 
     for (let i = 0; i < dotoday.length; i++) {
-        let task = dotoday[i];
-        let color = colorBg(task['priority']);
+        
         //document.getElementById('boardContent').innerHTML += generateTodoHTML(dotoday[i]);
         document.getElementById('dotoday').innerHTML += generateTodoHTML(dotoday[i]);
-        document.getElementById('dotoday').style = 'background-color:'+color+';';
-
+        
         //document.getElementById('inProgress').innerHTML += generateTodoHTML(medium[i]);
         //document.getElementById('done').innerHTML += generateTodoHTML(medium[i]);
     }
@@ -43,12 +40,10 @@ function updateHTML() {
     let inprogress = tasks.filter(t => t['list'] == 'inprogress');
 
     for (let i = 0; i < inprogress.length; i++) {
-        let task = inprogress[i];
-        let color = colorBg(task['priority']);
+     
         //document.getElementById('boardContent').innerHTML += generateTodoHTML(high[i]);
         //document.getElementById('dotoday').innerHTML += generateTodoHTML(high[i]);
         document.getElementById('inprogress').innerHTML += generateTodoHTML(inprogress[i]);
-        document.getElementById('inprogress').style = 'background-color:'+color+';';
 
         //document.getElementById('done').innerHTML += generateTodoHTML(high[i]);
     }
@@ -57,12 +52,12 @@ function updateHTML() {
     let done = tasks.filter(t => t['list'] == 'done');
 
     for (let i = 0; i < done.length; i++) {
-        let task = done[i];
-        let color = colorBg(task['priority']);
+       
+        
         //document.getElementById('boardContent').innerHTML += generateTodoHTML(high[i]);
         //document.getElementById('dotoday').innerHTML += generateTodoHTML(high[i]);
         document.getElementById('done').innerHTML += generateTodoHTML(done[i]);
-        document.getElementById('done').style = 'background-color:'+color+';';
+       
 
         //document.getElementById('done').innerHTML += generateTodoHTML(high[i]);
     }
@@ -72,14 +67,19 @@ function updateHTML() {
 
 
 function generateTodoHTML(element) {
-    return ` <div class="flex">
-                <button onclick="poppey(${element.id})" draggable="true" ondragstart="startDragging(${element.id})" type="button" class="popupButton dnone" data-bs-container="body" data-bs-toggle="popover"
+
+    // document.getElementById(`Popup${element.id}`).style = 'background-color:'+color+';';
+    return ` <div class="flex ">
+                <button class="${colorBg(element['priority'])}" onclick="poppey(${element.id})" draggable="true" ondragstart="startDragging(${element.id})" type="button" class="popupButton dnone" data-bs-container="body" data-bs-toggle="popover"
                 data-bs-placement="top">${element.title}
                 </button>
                 <span class="popuptext d-none" id="Popup${element.id}">${element.category}<br>${element.date}<span class="popupi popup"onclick="popupclose(${element.id})">X</span></span>
             </div>    
     `;
+    
 }
+
+
 
 function poppey(x) {
     document.getElementById("Popup" + x).classList.remove('d-none')
@@ -91,13 +91,13 @@ function popupclose(y) {
 
 function colorBg(priority) {
     if(priority == 'low'){
-        color = 'rgb(172, 209, 86)';
+        return 'prioL';
     } else if (priority == 'medium'){
-        color = 'rgb(250, 147, 87)';
+        return 'prioM';;
     } else if (priority == 'high'){
-        color = 'rgba(247, 43, 104, 0.767);';
+        return 'prioH';
     }
-    return color;
+    
 }
 
 
